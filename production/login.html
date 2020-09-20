@@ -1,117 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="images/favicon.jpg" type="image/ico" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>The Man </title>
+  <link rel="icon" href="images/favicon.jpg" type="image/ico" />
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/5a39f80e98.js" crossorigin="anonymous"></script>
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+  <title>The Man </title>
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
+  <!-- Bootstrap -->
+  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/5a39f80e98.js" crossorigin="anonymous"></script>
+  <!-- NProgress -->
+  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
 
-  <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
+  <!-- Custom Theme Style -->
+  <link href="../build/css/custom.min.css" rel="stylesheet">
+</head>
 
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form>
-              <h1>ĐĂNG NHẬP</h1>
-              <div>
-                <input type="text" id="Th_id" class="form-control" placeholder="Tên đăng nhập" required="" />
-              </div>
-              <div>
-                <input type="password" id="Th_pw" class="form-control" placeholder="Mật khẩu" required="" />
-              </div>
-              <div>
-                <!-- <a class="btn btn-default submit" href="index.html">Đăng nhập</a> -->
-                <button id="Th_login" class="btn btn-success">Đăng nhập</button>
-                <a class="reset_pass" href="#">Quên mật khẩu</a>
-              </div>
+<body class="login">
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form>
+            <h1>ĐĂNG NHẬP</h1>
+            <div>
+              <input type="text" id="Th_id" class="form-control" placeholder="Tên đăng nhập" required="" />
+
+              <input type="password" id="Th_pw" class="form-control" placeholder="Mật khẩu" required="" />\
+
+              <button id="Th_login" class="btn btn-primary submit">Đăng nhập</button>
+
+              <a class="reset_pass" href="#">Quên mật khẩu</a>
 
               <div class="clearfix"></div>
+            </div>
 
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-crown"></i> The Man</h1>
-                  <p>©2020 All Rights Reserved. The Man is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form>
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
-              </div>
+            <div class="separator">
+              <p class="change_link">Bạn là người mới ?
+                <a href="#signup" class="to_register"> Tạo tài khoản </a>
+              </p>
 
               <div class="clearfix"></div>
+              <br />
 
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
+              <div>
+                <h1><i class="fa fa-crown"></i> The Man</h1>
+                <p>©2020 All Rights Reserved. The Man is a Bootstrap 3 template. Privacy and Terms</p>
               </div>
-            </form>
-          </section>
-        </div>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div id="register" class="animate form registration_form">
+        <section class="login_content">
+          <form>
+            <h1>ĐĂNG KÝ</h1>
+            <div>
+              <input type="text" class="form-control" placeholder="Tên đăng nhập" required="" />
+
+              <input type="email" class="form-control" placeholder="Email" required="" />
+
+              <input type="password" class="form-control" placeholder="Mật khẩu" required="" />
+  
+              <button class="btn btn-primary submit" href="index.html">Tạo tài khoản</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Đã là thành viên ?
+                <a href="#signin" class="to_register"> Đăng nhập </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class="fa fa-crown"></i> The Man</h1>
+                <p>©2020 All Rights Reserved. The Man is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
       </div>
     </div>
-      <script>
-        Th_login.onclick = () =>{
-          var id = Th_id.value
-          var pass = Th_pw.value
-          if (id == "admin" && pass=="1"){
-          console.log("true")
-          alert("Đăng nhập thành công !")
-          window.location.assign(`index.html`)
-          }
-        }
-      </script>
-  </body>
+  </div>
+  <script>
+    Th_login.onclick = () => {
+      var id = Th_id.value
+      var pass = Th_pw.value
+      if (id == "admin" && pass == "1") {
+        console.log("true")
+        alert("Đăng nhập thành công !")
+        window.location = `index.html`
+        return false
+      }
+    }
+  </script>
+</body>
+
 </html>
