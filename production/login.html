@@ -7,12 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <link rel="icon" href="images/favicon.jpg" type="image/ico" />
+
+    <title>The Man </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a39f80e98.js" crossorigin="anonymous"></script>
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
@@ -31,16 +33,17 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form>
-              <h1>Login Form</h1>
+              <h1>ĐĂNG NHẬP</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" id="Th_id" class="form-control" placeholder="Tên đăng nhập" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" id="Th_pw" class="form-control" placeholder="Mật khẩu" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <!-- <a class="btn btn-default submit" href="index.html">Đăng nhập</a> -->
+                <button id="Th_login" class="btn btn-success">Đăng nhập</button>
+                <a class="reset_pass" href="#">Quên mật khẩu</a>
               </div>
 
               <div class="clearfix"></div>
@@ -54,8 +57,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-crown"></i> The Man</h1>
+                  <p>©2020 All Rights Reserved. The Man is a Bootstrap 3 template. Privacy and Terms</p>
                 </div>
               </div>
             </form>
@@ -99,5 +102,16 @@
         </div>
       </div>
     </div>
+      <script>
+        Th_login.onclick = () =>{
+          var id = Th_id.value
+          var pass = Th_pw.value
+          if (id == "admin" && pass=="1"){
+          console.log("true")
+          alert("Đăng nhập thành công !")
+          window.location.assign(`index.html`)
+          }
+        }
+      </script>
   </body>
 </html>
