@@ -14,21 +14,22 @@ $(document).ready(function(){
 });
 
 function getjson() {
-$.getJSON( "http://localhost/OS-System-Backend-BanQuanAo/public/api/categories", function( data ) {
+$.getJSON( "http://localhost/OS-System-Backend-BanQuanAo/public/api/products", function( data ) {
   //var items = [];
   $.each( data, function( key, val ) {
     //items.push( "<li id='" + key + "'>" + val + "</li>" );
-     $( "tbody" ).append( "<tr role='row' class='odd'>"
-     + "<td>"+val["Name"]+"</td>" +
-   + "<td class='"+"sorting_1"+"'>"+val["Name"]+"</td>"
-   + "<td>"+val["Name"]+"</td>"
-    + "<td>"+val["Name"]+"</td>"
-    + "<td>"+val["Name"]+"</td>"
-   + "<td>"+val["Name"]+"</td>"
-    + "<td>"+val["Name"]+"</td>"
-   + "<td>"+val["Name"]+"</td>"
-   + "<td>"+val["Name"]+"</td>"
-     + "</tr>");
+    var table = $('#datatable').DataTable();
+     table.rows.add( [ {
+        0:      val["Image"],
+        1:   val["Name"],
+        2:     val["SKU"],
+        3: val["Brand"],
+        4:     val["Size"] + " - "+ val["Color"],
+        5:       val["Price"] + " VND",
+        6:       val["Sale Price"] + " VND",
+        7:      val["Date"]
+    }] )
+    .draw();
   });
    
    //$( ".shirt_data" ).append( "</tbody>" );
