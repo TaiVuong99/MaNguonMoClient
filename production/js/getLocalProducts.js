@@ -31,8 +31,6 @@ function getjson() {
         8: `
         <button class="btn btn-success" onclick="show_editInfo.click()"><i class="fa fa-edit"></i></button>
         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-        <a class="btn btn-success"><i class="fa fa-edit"></i></a>
-        <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
         `
       }])
         .draw();
