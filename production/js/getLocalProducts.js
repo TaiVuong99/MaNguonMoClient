@@ -44,11 +44,6 @@ function getjson() {
     // }).appendTo( "body" );
   });
 }
-function showEditInfo() {
-  chuoi_titleModal = `<a class="text-success">Áo</a>`;
-  modalTitleId.innerHTML = chuoi_titleModal;
-  showModal.click();
-}
 
 function loadBrands() {
   $.getJSON("http://localhost/OS-BanQuanAo/public/api/brands", function (data) {
@@ -87,3 +82,11 @@ $(function () {
 $(document).ready(function () {
   getjson();
 });
+
+function showEditInfo() {
+  chuoi_titleModal = `<a class="text-success">Áo</a>`;
+  modalTitleId.innerHTML = chuoi_titleModal;
+  chuoi_bodyModal = `<div class="clearfix"></div>`
+  modalBodyId.innerHTML = chuoi_bodyModal
+  showModal.click();
+}
