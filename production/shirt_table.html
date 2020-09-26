@@ -41,11 +41,11 @@
 
 </head>
 
-<body class="nav-md" >
+<body class="nav-md">
   <div class="container body">
     <div class="main_container">
       <!-- Button trigger modal -->
-      <button id="show_editInfo" type="button" class="btn btn-primary btn-lg d-none" data-toggle="modal"
+      <button id="showModal" type="button" class="btn btn-primary btn-lg d-none" data-toggle="modal"
         data-target="#modelId">
         Launch
       </button>
@@ -57,18 +57,19 @@
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title text-primary" id="modalTitleId">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_editInfo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="tagForm" id="tag-form" action="http://localhost/OS-BanQuanAo/public/api/products/add" method="post" enctype="multipart/form-data">
-            <div class="modal-body" id="modalBodyId">
-              Body
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" id="submitModal">Save</button>
-            </div>
+            <form class="tagForm" id="tag-form" action="http://localhost/OS-BanQuanAo/public/api/products/add"
+              method="post" enctype="multipart/form-data">
+              <div class="modal-body" id="modalBodyId">
+                Body
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitModal">Save</button>
+              </div>
             </form>
           </div>
         </div>
@@ -252,8 +253,9 @@
                     <h2 style="margin-top: 10px;">SẢN PHẨM<small>ÁO</small></h2>
 
                     <!-- add new product button -->
-                    <button id="addNewProduct" style="margin-left:20px;" class="btn btn-primary" onclick="show_editInfo.click()"><i class="fa fa-file-import"></i> Thêm sản phẩm mới</button>
-                    
+                    <button id="addNewProduct" style="margin-left:20px;" class="btn btn-primary"
+                      onclick="showModal.click()"><i class="fa fa-file-import"></i> Thêm sản phẩm mới</button>
+
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -348,75 +350,71 @@
       chuoi_titleModal = `<a class="text-primary">Thêm sản phẩm</a>`;
       modalTitleId.innerHTML = chuoi_titleModal;
       chuoi_bodyModal = `
- 
-      <div id="imgaeId">
-        <label> Hình ảnh: </label>
-        <input type="file" id="imageValue" name="image">  
-      </div>
-      <div id="nameId">
-        <label> Tên: </label>
-        <input id="nameValue" name="name">
-      </div>
-      <div id="skuId">
-        <label> SKU: </label>
-        <input id="skuValue" name="sku">
-      </div>
-      <div id="brandsId">
-        <label> Thương hiệu: </label>
-        <select id="brandValue" name="brand">
-        </select>
-      </div>
-      <div id="attrId">
-        <label> Thuộc tính: </label>
-        <select id="attrValue" name="attribute">
-        </select>
-      </div>
-      <div id="priceId">
-        <label> Giá: </label>
-        <input type="number" id="priceValue" min="0" name="price">
-        VND
-      </div>
-      <div id="salesPriceId">
-        <label> Giá khuyến mãi: </label>
-        <input type="number" id="salesPriceValue" min="0" name="sale_price">
-        VND
-      </div>
-      <div id="dateId">
-        <label> Ngày nhập: </label>
-        <input style="text-align: right;" type="date" id="dateValue" name="date">
-      </div>
-      <div id="descripId">
-        <label> Mô tả: </label>
-        <input style="text-align: right;" type="text" id="descripValue" name="discription">
-      </div>
-      <div id="visibleId">
-        <label> Trạng thái: </label>
-        <select id="attrValue" name="visibility">
-          <option id="pub">Publish</option>
-          <option id="hid">Hidden</option>
-        </select>
-      </div>
-       <div id="cateId">
-        <label> Loại: </label>
-        <input type="number" id="cateValue" min="0" name="cate">
-        VND
-      </div>
+      <form id="addProduct">
+        <div class="form-group">
+          <label for="imageValue"> Hình ảnh: </label>
+          <input type="file" accept=".png, .jpeg, jpg, .psd, .pdf" id="imageValue" name="image">  
+        </div>
+        <div class="form-group">
+          <label for="nameValue"> Tên: </label>
+          <input class="form-control" id="nameValue" name="name">
+        </div>
+        <div class="form-group">
+          <label for="skuValue"> SKU: </label>
+          <input class="form-control" id="skuValue" name="sku">
+        </div>
+        <div class="form-group">
+          <label for="brandValue"> Thương hiệu: </label>
+          <select class="form-control" id="brandValue" name="brand">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="attrValue"> Thuộc tính: </label>
+          <select class="form-control" id="attrValue" name="attribute">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priceValue"> Giá: </label>
+          <input type="number" class="form-control" id="priceValue" min="0" name="price" placeholder="VND">
+          </input>
+        </div>
+        <div class="form-group">
+          <label for="salesPriceValue"> Giá khuyến mãi: </label>
+          <input type="number" class="form-control" id="salesPriceValue" min="0" name="sale_price" placeholder="VND">
+        </div>
+        <div class="form-group">
+          <label for="dateValue"> Ngày nhập: </label>
+          <input type="date" class="form-control" id="dateValue" name="date">
+        </div>
+        <div class="form-group">
+          <label for="descripValue"> Mô tả: </label>
+          <input type="text" class="form-control" id="descripValue" name="description">
+        </div>
+        <div class="form-group">
+          <label for="visibleValue"> Trạng thái: </label>
+          <select id="visibleValue" class="form-control" name="visibility">
+            <option id="pub">Publish</option>
+            <option id="hid">Hidden</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cateValue"> Loại: </label>
+          <input type="number" class="form-control" id="cateValue" min="0" name="cate">
+        </div>
+      </form>
       `;
 
-      
-      // <div>
-      // <div style="text-align: left;">
-      //   <label> Hình ảnh: </label></br>
-      //   <label> Tên: </label></br>
-      //   <label> SKU: </label></br>
-      //   <label> Thương hiệu: </label></br>
-      //   <label> Thuộc tính: </label></br>
-      //   <label> Giá: </label></br>
-      //   <label> Giá khuyến mãi: </label></br>
-      //   <label> Ngày nhập: </label></br>
-      // </div>
-      // <div style="text-align: right;">
-      //   <form>
+      // <div class="float-left">
+      //     <label for="imageValue"> Hình ảnh: </label></br>
+      //     <label for="nameValue"> Tên: </label></br>
+      //     <label for="skuValue"> SKU: </label></br>
+      //     <label for="brandValue"> Thương hiệu: </label></br>
+      //     <label for="attrValue"> Thuộc tính: </label></br>
+      //     <label for="priceValue"> Giá: </label></br>
+      //     <label for="salesPriceValue"> Giá khuyến mãi: </label></br>
+      //     <label for="dateValue"> Ngày nhập: </label></br>
+      //   </div>
+      //   <div class="float-right">
       //     <input type="file" id="imageValue">
       //     <input id="nameValue">
       //     <input id="skuValue">
@@ -425,21 +423,22 @@
       //     <input type="number" id="priceValue" min="0">VND
       //     <input type="number" id="salesPriceValue" min="0">VND
       //     <input style="text-align: right;" type="date" id="dateValue" >
-      //   </form>
-      // </div>
-      // </div>
-      modalBodyId.innerHTML=chuoi_bodyModal;
+      //   </div>
+      modalBodyId.innerHTML = chuoi_bodyModal;
       loadBrands();
       loadAttributes();
-      show_editInfo.click();
-
+      showModal.click();
     }
+          
     // submitModal.onclick = () =>{
-    //   console.log('click')
-    //   addProductId.submit();
+    //   var name = nameValue.value
+    //   console.log(name)
+    //   console.log(modalBodyId.value)
+    //   modalBodyId.push();
     //   return false;
     //   console.log('sub')
     // }
+
   </script>
 </body>
 

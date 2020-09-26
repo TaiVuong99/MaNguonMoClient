@@ -6,7 +6,7 @@ function appendText() {
   //txt3.innerHTML = "Text.";         // Create text with DOM
   $("tbody").append(txt2);   // Append new elements
 }
-  // loadBrands();
+// loadBrands();
 
 
 function getjson() {
@@ -44,44 +44,44 @@ function getjson() {
     // }).appendTo( "body" );
   });
 }
-function showEditInfo(){
+function showEditInfo() {
   chuoi_titleModal = `<a class="text-success">Áo</a>`;
   modalTitleId.innerHTML = chuoi_titleModal;
-  show_editInfo.click();
+  showModal.click();
 }
 
 function loadBrands() {
-   $.getJSON("http://localhost/OS-BanQuanAo/public/api/brands", function (data) {
-      $.each(data, function (key, val) {
-        $('#brandValue').append("<option id='"+val['Id']+"'>"+val['Name']+"</option>"); 
-      });
-     });
+  $.getJSON("http://localhost/OS-BanQuanAo/public/api/brands", function (data) {
+    $.each(data, function (key, val) {
+      $('#brandValue').append("<option id='" + val['Id'] + "'>" + val['Name'] + "</option>");
+    });
+  });
 }
 function loadAttributes() {
-   $.getJSON("http://localhost/OS-BanQuanAo/public/api/attributes", function (data) {
-      $.each(data, function (key, val) {
-        $('#attrValue').append("<option id='"+val['Id']+"'>"+val['Size']+' - '+val['Color']+"</option>"); 
-      });
-     });
+  $.getJSON("http://localhost/OS-BanQuanAo/public/api/attributes", function (data) {
+    $.each(data, function (key, val) {
+      $('#attrValue').append("<option id='" + val['Id'] + "'>" + val['Size'] + ' - ' + val['Color'] + "</option>");
+    });
+  });
 }
 
-$(function() {
+$(function () {
 
-$('#submitModal').on('click', function(e) {
+  $('#submitModal').on('click', function (e) {
     e.preventDefault();
     $.ajax({
-        type: "POST",
-        url: "http://localhost/OS-BanQuanAo/public/api/products/add",
-        data: $('form.tagForm').serialize(),
-        success: function(response) {
-            alert(response['response']);
-        },
-        error: function() {
-            alert('Error');
-        }
+      type: "POST",
+      url: "http://localhost/OS-BanQuanAo/public/api/products/add",
+      data: $('form.tagForm').serialize(),
+      success: function (response) {
+        alert(response['response']);
+      },
+      error: function () {
+        alert('Error');
+      }
     });
     return false;
-});
+  });
 });
 
 $(document).ready(function () {
