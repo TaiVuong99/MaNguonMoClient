@@ -343,8 +343,85 @@
   <script src="../build/js/custom.min.js"></script>
   <script>
     addNewProduct.onclick = () => {
-      chuoi_titleModal = `Thêm sản phẩm`
+      chuoi_titleModal = `<a class="text-primary">Thêm sản phẩm</a>`
       modalTitleId.innerHTML = chuoi_titleModal
+      chuoi_bodyModal = `
+
+      <div id="imgaeId">
+        <label> Hình ảnh: </label>
+        <input type="file" id="imageValue">  
+      </div>
+      <div id="nameId">
+        <label> Tên: </label>
+        <input id="nameValue">
+      </div>
+      <div id="skuId">
+        <label> SKU: </label>
+        <input id="skuValue">
+      </div>
+      <div id="brandsId">
+        <label> Thương hiệu: </label>
+        <input id="brandsValue">
+      </div>
+      <div id="attrId">
+        <label> Thuộc tính: </label>
+        <select id="attrValue">
+        </select>
+      </div>
+      <div id="priceId">
+        <label> Giá: </label>
+        <input type="number" id="priceValue" min="0">
+        VND
+      </div>
+      <div id="salesPriceId">
+        <label> Giá khuyến mãi: </label>
+        <input type="number" id="salesPriceValue" min="0">
+        VND
+      </div>
+      <div id="dateId">
+        <label> Ngày nhập: </label>
+        <input style="text-align: right;" type="date" id="dateValue" >
+      </div>
+      <div id="descripId">
+        <label> Mô tả: </label>
+        <input style="text-align: right;" type="date" id="descripValue" >
+      </div>
+      <div id="visibleId">
+        <label> Trạng thái: </label>
+        <select id="attrValue">
+          <option id="pub">Publish</option>
+          <option id="hid">Hidden</option>
+        </select>
+      </div>
+      
+      `
+
+      
+      // <div>
+      // <div style="text-align: left;">
+      //   <label> Hình ảnh: </label></br>
+      //   <label> Tên: </label></br>
+      //   <label> SKU: </label></br>
+      //   <label> Thương hiệu: </label></br>
+      //   <label> Thuộc tính: </label></br>
+      //   <label> Giá: </label></br>
+      //   <label> Giá khuyến mãi: </label></br>
+      //   <label> Ngày nhập: </label></br>
+      // </div>
+      // <div style="text-align: right;">
+      //   <form>
+      //     <input type="file" id="imageValue">
+      //     <input id="nameValue">
+      //     <input id="skuValue">
+      //     <input id="brandsValue">
+      //     <select id="attrValue"></select>
+      //     <input type="number" id="priceValue" min="0">VND
+      //     <input type="number" id="salesPriceValue" min="0">VND
+      //     <input style="text-align: right;" type="date" id="dateValue" >
+      //   </form>
+      // </div>
+      // </div>
+      modalBodyId.innerHTML=chuoi_bodyModal
       show_editInfo.click()
     }
   </script>
