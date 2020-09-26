@@ -30,7 +30,7 @@ function getjson() {
         7: val["Date"],
         8: `
         <div style="display: inline-flex" >
-        <button class="btn btn-success" onclick="show_editInfo.click()"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
         </div>
         `
@@ -45,4 +45,9 @@ function getjson() {
     //   html: items.join( "" )
     // }).appendTo( "body" );
   });
+}
+function showEditInfo(){
+  chuoi_titleModal = `Áo`
+  modalTitleId.innerHTML = chuoi_titleModal
+  show_editInfo.click()
 }
