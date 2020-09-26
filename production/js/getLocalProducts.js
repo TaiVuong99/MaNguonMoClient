@@ -47,7 +47,7 @@ function getjson() {
   });
 }
 function showEditInfo(){
-  chuoi_titleModal = `Áo`
+  chuoi_titleModal = `<a class="text-success">Áo</a>`
   modalTitleId.innerHTML = chuoi_titleModal
   show_editInfo.click()
 }
