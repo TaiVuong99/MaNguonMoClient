@@ -61,7 +61,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="tagForm" id="tag-form" action="http://localhost/OS-BanQuanAo/public/api/products/add"
+            <form class="tagForm" id="tag-form" 
               method="post" enctype="multipart/form-data">
               <div class="modal-body" id="modalBodyId">
                 Body
@@ -74,6 +74,7 @@
           </div>
         </div>
       </div>
+     <!--  action="http://localhost/OS-BanQuanAo/public/api/products/add" -->
       <!-- /Modal -->
 
       <!-- menu -->
@@ -350,7 +351,6 @@
       chuoi_titleModal = `<a class="text-primary">Thêm sản phẩm</a>`;
       modalTitleId.innerHTML = chuoi_titleModal;
       chuoi_bodyModal = `
-      <form id="addProduct">
         <div class="form-group">
           <label for="imageValue"> Hình ảnh: </label>
           <input type="file" accept=".png, .jpeg, jpg, .psd, .pdf" id="imageValue" name="image">  
@@ -428,6 +428,7 @@
       loadBrands();
       loadAttributes();
       showModal.click();
+      
     }
           
     // submitModal.onclick = () =>{

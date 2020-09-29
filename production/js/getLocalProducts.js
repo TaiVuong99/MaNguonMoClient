@@ -51,6 +51,7 @@ function loadBrands() {
       $('#brandValue').append("<option id='" + val['Id'] + "'>" + val['Name'] + "</option>");
     });
   });
+
 }
 function loadAttributes() {
   $.getJSON("http://localhost/OS-BanQuanAo/public/api/attributes", function (data) {
@@ -63,19 +64,57 @@ function loadAttributes() {
 $(function () {
 
   $('#submitModal').on('click', function (e) {
+    //alert("test");
+     var myObject = {
+      name : "",
+      image : "",
+      brand : "",
+      sku : "",
+       attribute : "",   
+      price : "",
+     sale_price : "",
+     description : "",
+     visibility : "",
+     date : "",
+     cate : ""
+    };
+   // alert("test2");
+     myObject['name'] = document.getElementById('nameValue').value;
+     // alert(myObject['name']);
+      myObject['image'] = "image";
+      //alert(myObject[image]);
+     myObject['brand'] = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id;
+     //alert(myObject['brand']);
+     myObject['sku'] = document.getElementById('skuValue').value;
+     myObject['attribute'] = document.getElementById('attrValue').options[document.getElementById('attrValue').selectedIndex].id;
+     myObject['price'] = document.getElementById('priceValue').value;
+    myObject['sale_price'] = document.getElementById('salesPriceValue').value;
+    myObject['description'] = document.getElementById('descripValue').value;
+    myObject['visibility'] =  document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
+    myObject['date'] = document.getElementById('dateValue').value;
+    myObject['cate'] = document.getElementById('cateValue').value;
+     var myJSON = JSON.stringify(myObject);
+     alert("test2");
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: "http://localhost/OS-BanQuanAo/public/api/products/add",
-      data: $('form.tagForm').serialize(),
+      dataType: 'json',
+      data: myJSON ,
+      contentType: 'application/json;charset=UTF-8',
       success: function (response) {
         alert(response['response']);
+        alert("success");
       },
       error: function () {
         alert('Error');
+        //console.log(myObject['name']);
+        console.log(JSON.parse(myJSON));
       }
     });
     return false;
+   // debugger;
+    
   });
 });
 
