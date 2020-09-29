@@ -104,9 +104,12 @@
       var pass = Th_pw.value
       if (id == "admin" && pass == "1") {
         console.log("true")
-        alert("Đăng nhập thành công !")
+        alert("Đăng nhập thành công ! Vui lòng chờ chuyển trang")
         window.location = `index.html`
         // return false
+      }
+      else {
+        alert("Đăng nhập không thành công !!!")
       }
     }
   </script>

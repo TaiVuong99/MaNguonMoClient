@@ -27,7 +27,7 @@ function getjson() {
         8: `
         <div style="display: inline-flex" >
         <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
-        <button class="btn btn-danger" id="delProduct" onclick="confirm('Bạn muốn xóa sản phẩm khỏi danh sách ?')"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-danger" id="delProduct" onclick="showDelInfo()"><i class="fa fa-trash"></i></button>
         </div>
         `
       }])
@@ -65,42 +65,42 @@ $(function () {
 
   $('#submitModal').on('click', function (e) {
     //alert("test");
-     var myObject = {
-      name : "",
-      image : "",
-      brand : "",
-      sku : "",
-       attribute : "",   
-      price : "",
-     sale_price : "",
-     description : "",
-     visibility : "",
-     date : "",
-     cate : ""
+    var myObject = {
+      name: "",
+      image: "",
+      brand: "",
+      sku: "",
+      attribute: "",
+      price: "",
+      sale_price: "",
+      description: "",
+      visibility: "",
+      date: "",
+      cate: ""
     };
-   // alert("test2");
-     myObject['name'] = document.getElementById('nameValue').value;
-     // alert(myObject['name']);
-      myObject['image'] = "image";
-      //alert(myObject[image]);
-     myObject['brand'] = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id;
-     //alert(myObject['brand']);
-     myObject['sku'] = document.getElementById('skuValue').value;
-     myObject['attribute'] = document.getElementById('attrValue').options[document.getElementById('attrValue').selectedIndex].id;
-     myObject['price'] = document.getElementById('priceValue').value;
+    // alert("test2");
+    myObject['name'] = document.getElementById('nameValue').value;
+    // alert(myObject['name']);
+    myObject['image'] = "image";
+    //alert(myObject[image]);
+    myObject['brand'] = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id;
+    //alert(myObject['brand']);
+    myObject['sku'] = document.getElementById('skuValue').value;
+    myObject['attribute'] = document.getElementById('attrValue').options[document.getElementById('attrValue').selectedIndex].id;
+    myObject['price'] = document.getElementById('priceValue').value;
     myObject['sale_price'] = document.getElementById('salesPriceValue').value;
     myObject['description'] = document.getElementById('descripValue').value;
-    myObject['visibility'] =  document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
+    myObject['visibility'] = document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
     myObject['date'] = document.getElementById('dateValue').value;
     myObject['cate'] = document.getElementById('cateValue').value;
-     var myJSON = JSON.stringify(myObject);
-     alert("test2");
+    var myJSON = JSON.stringify(myObject);
+    alert("test2");
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: "http://localhost/OS-BanQuanAo/public/api/products/add",
       dataType: 'json',
-      data: myJSON ,
+      data: myJSON,
       contentType: 'application/json;charset=UTF-8',
       success: function (response) {
         alert(response['response']);
@@ -113,8 +113,8 @@ $(function () {
       }
     });
     return false;
-   // debugger;
-    
+    // debugger;
+
   });
 });
 
@@ -130,6 +130,6 @@ function showEditInfo() {
   showModal.click();
 }
 
-function showDelInfo(){
-  confirm(`Bạn muốn xóa sản phẩm khỏi danh sách`)
+function showDelInfo() {
+  confirm(`Bạn muốn xóa sản phẩm khỏi danh sách ?`)
 }
