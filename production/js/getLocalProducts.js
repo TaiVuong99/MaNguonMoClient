@@ -27,7 +27,7 @@ function getjson() {
         8: `
         <div style="display: inline-flex" >
         <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
-        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-danger" id="delProduct" onclick="confirm('Bạn muốn xóa sản phẩm khỏi danh sách ?')"><i class="fa fa-trash"></i></button>
         </div>
         `
       }])
@@ -89,4 +89,8 @@ function showEditInfo() {
   chuoi_bodyModal = `<div class="clearfix"></div>`
   modalBodyId.innerHTML = chuoi_bodyModal
   showModal.click();
+}
+
+function showDelInfo(){
+  confirm(`Bạn muốn xóa sản phẩm khỏi danh sách`)
 }
