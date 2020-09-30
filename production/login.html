@@ -99,16 +99,31 @@
     </div>
   </div>
   <script>
+    // if (typeof (Storage) !== 'undefined') {
+    //   //Nếu có hỗ trợ
+    //   //Thực hiện thao tác với Storage
+    //   alert('Trình duyệt của bạn hỗ trợ Storage');
+    // } else {
+    //   //Nếu không hỗ trợ
+    //   alert('Trình duyệt của bạn không hỗ trợ Storage');
+    // }
+
     Th_login.onclick = () => {
       var id = Th_id.value
       var pass = Th_pw.value
+      if (id == "khachhang" && pass == "123"){
+        sessionStorage.setItem("idlogin",id)
+        alert("Trang Khách hàng đang chỉnh sửa ! Vui lòng quay trở lại sau")
+        sessionStorage.removeItem("idlogin")
+      }
       if (id == "admin" && pass == "1") {
-        console.log("true")
+        sessionStorage.setItem("idlogin",id)
         alert("Đăng nhập thành công ! Vui lòng chờ chuyển trang")
         window.location = `index.html`
         // return false
       }
       else {
+        sessionStorage.removeItem("idlogin")
         alert("Đăng nhập không thành công !!!")
       }
     }
