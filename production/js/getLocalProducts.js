@@ -1,47 +1,26 @@
-
-function appendText() {
-  //var txt1 = "<p>Text.</p>";        // Create text with HTML
-  var txt2 = $("<p></p>").text("Text.");  // Create text with jQuery
-  //var txt3 = document.createElement("p");
-  //txt3.innerHTML = "Text.";         // Create text with DOM
-  $("tbody").append(txt2);   // Append new elements
-}
-// loadBrands();
-
-
-function getjson() {
-  $.getJSON("http://localhost/OS-BanQuanAo/public/api/products", function (data) {
-    //var items = [];
-    $.each(data, function (key, val) {
-      //items.push( "<li id='" + key + "'>" + val + "</li>" );
-      var table = $('#datatable').DataTable();
-      table.rows.add([{
-        0: val["Image"],
-        1: val["Name"],
-        2: val["SKU"],
-        3: val["Brand"],
-        4: val["Size"] + " - " + val["Color"],
-        5: val["Price"] + " VND",
-        6: val["Sale Price"] + " VND",
-        7: val["Date"],
-        8: `
-        <div style="display: inline-flex" >
-        <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
-        <button class="btn btn-danger" id="delProduct" onclick="showDelInfo()"><i class="fa fa-trash"></i></button>
-        </div>
-        `
+function getjson(id) {
+  var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
+  $.getJSON(url, function (data) {
+  $.each(data, function (key, val) {
+    var table = $('#datatable').DataTable();
+    table.rows.add([{
+      0: val["Image"],
+      1: val["Name"],
+      2: val["SKU"],
+      3: val["Brand"],
+      4: val["Size"] + " - " + val["Color"],
+      5: val["Price"] + " VND",
+      6: val["Sale Price"] + " VND",
+      7: val["Date"],
+      8: `
+      <div style="display: inline-flex" >
+      <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
+      <button class="btn btn-danger" id="delProduct" onclick="showDelInfo()"><i class="fa fa-trash"></i></button>
+      </div>
+      `
       }])
-        .draw();
+      .draw();
     });
-
-
-
-    //$( ".shirt_data" ).append( "</tbody>" );
-
-    // $( "<ul/>", {
-    //   "class": "my-new-list",
-    //   html: items.join( "" )
-    // }).appendTo( "body" );
   });
 }
 
@@ -103,7 +82,7 @@ $(function () {
       data: myJSON,
       contentType: 'application/json;charset=UTF-8',
       success: function (response) {
-        alert(response['response']);
+       console.log(response);
         alert("success");
       },
       error: function () {
@@ -118,9 +97,9 @@ $(function () {
   });
 });
 
-$(document).ready(function () {
-  getjson();
-});
+// $(document).ready(function () {
+//   getjson();
+// });
 
 function showEditInfo() {
   chuoi_titleModal = `<a class="text-success">Áo</a>`;

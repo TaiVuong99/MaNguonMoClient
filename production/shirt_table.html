@@ -318,7 +318,9 @@
 
   <!-- Bootstrap -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- jsfile -->
   <script type="text/javascript" src="./js/getLocalProducts.js" async></script>
+
   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FastClick -->
   <script src="../vendors/fastclick/lib/fastclick.js"></script>
@@ -343,6 +345,14 @@
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+  <script type="text/javascript">
+      var url_string = window.location.href;
+      var url = new URL(url_string);
+      var id = url.searchParams.get("id");
+      $(document).ready(function () {
+        getjson(id);
+      });
+  </script>
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
@@ -403,43 +413,11 @@
         </div>
       </form>
       `;
-
-      // <div class="float-left">
-      //     <label for="imageValue"> Hình ảnh: </label></br>
-      //     <label for="nameValue"> Tên: </label></br>
-      //     <label for="skuValue"> SKU: </label></br>
-      //     <label for="brandValue"> Thương hiệu: </label></br>
-      //     <label for="attrValue"> Thuộc tính: </label></br>
-      //     <label for="priceValue"> Giá: </label></br>
-      //     <label for="salesPriceValue"> Giá khuyến mãi: </label></br>
-      //     <label for="dateValue"> Ngày nhập: </label></br>
-      //   </div>
-      //   <div class="float-right">
-      //     <input type="file" id="imageValue">
-      //     <input id="nameValue">
-      //     <input id="skuValue">
-      //     <input id="brandsValue">
-      //     <select id="attrValue"></select>
-      //     <input type="number" id="priceValue" min="0">VND
-      //     <input type="number" id="salesPriceValue" min="0">VND
-      //     <input style="text-align: right;" type="date" id="dateValue" >
-      //   </div>
       modalBodyId.innerHTML = chuoi_bodyModal;
       loadBrands();
       loadAttributes();
       showModal.click();
-      
-    }
-          
-    // submitModal.onclick = () =>{
-    //   var name = nameValue.value
-    //   console.log(name)
-    //   console.log(modalBodyId.value)
-    //   modalBodyId.push();
-    //   return false;
-    //   console.log('sub')
-    // }
-
+    }    
   </script>
 </body>
 
