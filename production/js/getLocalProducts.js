@@ -43,7 +43,6 @@ function loadAttributes() {
 $(function () {
 
   $('#submitModal').on('click', function (e) {
-    //alert("test");
     var myObject = {
       name: "",
       image: "",
@@ -57,13 +56,9 @@ $(function () {
       date: "",
       cate: ""
     };
-    // alert("test2");
     myObject['name'] = document.getElementById('nameValue').value;
-    // alert(myObject['name']);
     myObject['image'] = "image";
-    //alert(myObject[image]);
     myObject['brand'] = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id;
-    //alert(myObject['brand']);
     myObject['sku'] = document.getElementById('skuValue').value;
     myObject['attribute'] = document.getElementById('attrValue').options[document.getElementById('attrValue').selectedIndex].id;
     myObject['price'] = document.getElementById('priceValue').value;
@@ -83,23 +78,19 @@ $(function () {
       contentType: 'application/json;charset=UTF-8',
       success: function (response) {
        console.log(response);
-        alert("success");
+        alert("Thêm thành công");
+        var table = $('#datatable').DataTable();
+        table
+        .clear();
+        getjson(myObject['cate']);
       },
       error: function () {
         alert('Error');
-        //console.log(myObject['name']);
-        console.log(JSON.parse(myJSON));
       }
     });
     return false;
-    // debugger;
-
   });
 });
-
-// $(document).ready(function () {
-//   getjson();
-// });
 
 function showEditInfo() {
   chuoi_titleModal = `<a class="text-success">Áo</a>`;
