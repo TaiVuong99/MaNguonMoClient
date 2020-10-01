@@ -266,7 +266,7 @@
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- jsfile -->
-  <script type="text/javascript" src="./js/getLocalProducts.js" async></script>
+  <script type="text/javascript" src="./js/getLocalProducts.js"></script>
   <!-- FastClick -->
   <script src="../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
@@ -295,7 +295,7 @@
     var url = new URL(url_string);
     var id = url.searchParams.get("id");
     $(document).ready(function () {
-      getjson(id);
+      getpProductByCate(id);
     });
   </script>
 

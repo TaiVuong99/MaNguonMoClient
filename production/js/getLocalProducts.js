@@ -1,9 +1,10 @@
-function getjson(id) {
+function getpProductByCate(id) {
   var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
   $.getJSON(url, function (data) {
   $.each(data, function (key, val) {
     var table = $('#datatable').DataTable();
     table.rows.add([{
+      "DT_RowId": val["Id"],
       0: val["Image"],
       1: val["Name"],
       2: val["SKU"],
@@ -14,12 +15,12 @@ function getjson(id) {
       7: val["Date"],
       8: `
       <div style="display: inline-flex" >
-      <button class="btn btn-success" id="editProduct" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
-      <button class="btn btn-danger" id="delProduct" onclick="showDelInfo()"><i class="fa fa-trash"></i></button>
+      <button class="btn btn-success" onclick="showEditInfo()"><i class="fa fa-edit"></i></button>
+      <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
       </div>
       `
-      }])
-      .draw();
+      }]);
+      table.draw();
     });
   });
 }
@@ -40,8 +41,26 @@ function loadAttributes() {
   });
 }
 
-$(function () {
+function delProduct(id,cate) {
+  var urlString = "http://localhost/OS-BanQuanAo/public/api/products/delete/" + id;
+  $.ajax({
+    url: urlString,
+    type: 'DELETE',
+    success: function(response) {
+        alert("Xoá thành công");
+        var table = $('#datatable').DataTable();
+        table
+        .clear();
+        getpProductByCate(cate);
+    },
+    error: function(response) {
+      console.log(response);
+    }
+});
+}
 
+// click button save
+$(function () {
   $('#submitModal').on('click', function (e) {
     var myObject = {
       name: "",
@@ -68,7 +87,6 @@ $(function () {
     myObject['date'] = document.getElementById('dateValue').value;
     myObject['cate'] = document.getElementById('cateValue').value;
     var myJSON = JSON.stringify(myObject);
-    alert("test2");
     e.preventDefault();
     $.ajax({
       type: "POST",
@@ -77,12 +95,12 @@ $(function () {
       data: myJSON,
       contentType: 'application/json;charset=UTF-8',
       success: function (response) {
-       console.log(response);
+        console.log(response);
         alert("Thêm thành công");
         var table = $('#datatable').DataTable();
         table
         .clear();
-        getjson(myObject['cate']);
+        getpProductByCate(myObject['cate']);
       },
       error: function () {
         alert('Error');
@@ -100,6 +118,13 @@ function showEditInfo() {
   showModal.click();
 }
 
-function showDelInfo() {
-  confirm(`Bạn muốn xóa sản phẩm khỏi danh sách ?`)
+function showDelInfo(elm) {
+  var check = confirm(`Bạn muốn xóa sản phẩm khỏi danh sách ?`);
+  if(check==true) {
+    var al = $(elm).closest('tr').attr('id');
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var cate = url.searchParams.get("id");
+    delProduct(al,cate);
+  }
 }
