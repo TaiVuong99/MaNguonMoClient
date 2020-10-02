@@ -128,7 +128,7 @@ function delProduct(id) {
       var table = $('#datatable').DataTable();
       table
         .clear();
-      getpProductByCate(cate_id);
+      getProductByCate(cate_id);
     },
     error: function (response) {
       console.log(response);
