@@ -337,9 +337,12 @@
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+
+  <!-- Add product modal -->
   <script>
     addNewProduct.onclick = () => {
-      chuoi_titleModal = `<a class="text-primary">Thêm sản phẩm</a>`;
+      flag = 0;
+      chuoi_titleModal = `<a class="text-primary" id="modal_title_id">Thêm sản phẩm</a>`; 
       modalTitleId.innerHTML = chuoi_titleModal;
       chuoi_bodyModal = `
         <div class="form-group">
