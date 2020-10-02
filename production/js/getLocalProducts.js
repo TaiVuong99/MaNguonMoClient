@@ -210,9 +210,13 @@ function showEditInfo(elm) {
   var url = new URL(url_string);
   var id = url.searchParams.get("id");
   document.getElementById("cateValue").value = id;
+  //$('#brandValue option:selected').prop('selected', false);
+  //$('#attrValue option:selected').prop('selected', false);
   $(document).on('shown.bs.modal', '#modelId', function (e) {
-      $("#brandValue option:contains(" + currentBrand + ")").attr('selected', 'selected');
-      $("#attrValue option:contains(" + currentAttr + ")").attr('selected', 'selected');
+  if(flag == 1) {
+      $("#brandValue option:contains(" + currentBrand + ")").prop('selected', true);
+      $("#attrValue option:contains(" + currentAttr + ")").prop('selected', true);
+  }
   });
   var al = $(elm).closest('tr').attr('id');
   getProductById(al);

@@ -400,6 +400,11 @@
       modalBodyId.innerHTML = chuoi_bodyModal;
       loadBrands();
       loadAttributes();
+      $(document).on('shown.bs.modal', '#modelId', function (e) {
+      // if(flag == 0) {
+      //   document.getElementById("brandValue").selectedIndex = "0";
+      // }
+  });
       showModal.click();
     }    
   </script>
