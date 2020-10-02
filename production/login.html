@@ -38,7 +38,7 @@
             <div>
               <input type="text" id="Th_id" class="form-control" placeholder="Tên đăng nhập" required="" />
 
-              <input type="password" id="Th_pw" class="form-control" placeholder="Mật khẩu" required="" />\
+              <input type="password" id="Th_pw" class="form-control" placeholder="Mật khẩu" required="" />
 
               <button id="Th_login" class="btn btn-primary submit" type="button">Đăng nhập</button>
 
@@ -111,20 +111,20 @@
     Th_login.onclick = () => {
       var id = Th_id.value
       var pass = Th_pw.value
-      if (id == "khachhang" && pass == "123"){
-        sessionStorage.setItem("idlogin",id)
+      if (id == "khachhang" && pass == "123") {
+        sessionStorage.setItem("idlogin", id)
         alert("Trang Khách hàng đang chỉnh sửa ! Vui lòng quay trở lại sau")
         sessionStorage.removeItem("idlogin")
       }
       if (id == "admin" && pass == "1") {
-        sessionStorage.setItem("idlogin",id)
+        sessionStorage.setItem("idlogin", id)
         alert("Đăng nhập thành công ! Vui lòng chờ chuyển trang")
         window.location = `index.html`
         // return false
       }
       else {
-        sessionStorage.removeItem("idlogin")
         alert("Đăng nhập không thành công !!!")
+        sessionStorage.removeItem("idlogin")
       }
     }
   </script>

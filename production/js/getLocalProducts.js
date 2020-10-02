@@ -7,20 +7,20 @@ var cate_id = url.searchParams.get("id");
 function getpProductByCate(id) {
   var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
   $.getJSON(url, function (data) {
-  //var img = "";
-  var table = $('#datatable').DataTable();
-  $.each(data, function (key, val) {
-    //img = local_folder + val["Image"];
-    table.rows.add([{
-      "DT_RowId": val["Id"],
-      0: val["Name"],
-      1: val["SKU"],
-      2: val["Brand"],
-      3: val["Size"] + " - " + val["Color"],
-      4: val["Price"], //" VND",
-      5: val["Sale Price"],// + " VND",
-      6: val["Date"],
-      7: `
+    //var img = "";
+    var table = $('#datatable').DataTable();
+    $.each(data, function (key, val) {
+      //img = local_folder + val["Image"];
+      table.rows.add([{
+        "DT_RowId": val["Id"],
+        0: val["Name"],
+        1: val["SKU"],
+        2: val["Brand"],
+        3: val["Size"] + " - " + val["Color"],
+        4: val["Price"], //" VND",
+        5: val["Sale Price"],// + " VND",
+        6: val["Date"],
+        7: `
       <div style="display: inline-flex" >
       <button class="btn btn-success" onclick="showEditInfo(this)" name="btnUpdate"><i class="fa fa-edit"></i></button>
       <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
@@ -29,7 +29,7 @@ function getpProductByCate(id) {
       }]);
       table.draw();
     });
-   });
+  });
 }
 
 function getProductById(id) {
@@ -61,17 +61,17 @@ function delProduct(id) {
   $.ajax({
     url: urlString,
     type: 'DELETE',
-    success: function(response) {
-        alert("Xoá thành công");
-        var table = $('#datatable').DataTable();
-        table
+    success: function (response) {
+      alert("Xoá thành công");
+      var table = $('#datatable').DataTable();
+      table
         .clear();
-        getpProductByCate(cate_id);
+      getpProductByCate(cate_id);
     },
-    error: function(response) {
+    error: function (response) {
       console.log(response);
     }
-});
+  });
 }
 
 // click button save
@@ -80,14 +80,14 @@ $(function () {
     var checkedType = "";
     var checkedUrl = "";
     var resString = "";
-    if(flag==0) {
+    if (flag == 0) {
       checkedType = "POST";
       checkedUrl = "http://localhost/OS-BanQuanAo/public/api/products/add";
       resString = "Thêm thành công";
     }
     else {
       checkedType = "PUT";
-      checkedUrl = "http://localhost/OS-BanQuanAo/public/api/products/update/"+ $(':hidden#IdValue').val();
+      checkedUrl = "http://localhost/OS-BanQuanAo/public/api/products/update/" + $(':hidden#IdValue').val();
       resString = "Sửa thành công";
     }
     var myObject = {
@@ -104,8 +104,7 @@ $(function () {
       cate: ""
     };
     myObject['name'] = document.getElementById('nameValue').value;
-    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
-    myObject['image'] = filename;
+    myObject['image'] = "image";
     var brand_id = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id.substring(6);
     myObject['brand'] = brand_id;
     myObject['sku'] = document.getElementById('skuValue').value;
@@ -117,6 +116,12 @@ $(function () {
     myObject['visibility'] = document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
     myObject['date'] = document.getElementById('dateValue').value;
     myObject['cate'] = cate_id;
+
+    if (myObject['name'] == "" || myObject['sku'] == "" || myObject['price'] == "" || myObject['sale_price'] == "" || myObject['description'] == "" || myObject['date'] == "") {
+      alert('Vui lòng nhập đầy đủ thông tin sản phẩm');
+      return false;
+    }
+
     var myJSON = JSON.stringify(myObject);
     e.preventDefault();
     $.ajax({
@@ -130,7 +135,7 @@ $(function () {
         alert(resString);
         var table = $('#datatable').DataTable();
         table
-        .clear();
+          .clear();
         getpProductByCate(myObject['cate']);
       },
       error: function () {
@@ -145,17 +150,14 @@ function showEditInfo(elm) {
   flag = 1;
   chuoi_titleModal = `<a class="text-success">Sửa sản phẩm</a>`;
   modalTitleId.innerHTML = chuoi_titleModal;
-  chuoi_bodyModal = `<div class="form-group">
-          <label for="imageValue"> Hình ảnh: </label>
-          <input type="file" accept=".png, .jpeg, .jpg, .psd, .pdf" id="imageValue" name="image">  
-        </div>
+  chuoi_bodyModal = `
         <div class="form-group">
           <label for="nameValue"> Tên: </label>
-          <input class="form-control" id="nameValue" name="name">
+          <input class="form-control" id="nameValue" name="name" required>
         </div>
         <div class="form-group">
           <label for="skuValue"> SKU: </label>
-          <input class="form-control" id="skuValue" name="sku">
+          <input class="form-control" id="skuValue" name="sku" required>
         </div>
         <div class="form-group">
           <label for="brandValue"> Thương hiệu: </label>
@@ -169,20 +171,20 @@ function showEditInfo(elm) {
         </div>
         <div class="form-group">
           <label for="priceValue"> Giá: </label>
-          <input type="number" class="form-control" id="priceValue" min="0" name="price" placeholder="VND">
+          <input type="number" class="form-control" id="priceValue" min="0" name="price" placeholder="VND" required> 
           </input>
         </div>
         <div class="form-group">
           <label for="salesPriceValue"> Giá khuyến mãi: </label>
-          <input type="number" class="form-control" id="salesPriceValue" min="0" name="sale_price" placeholder="VND">
+          <input type="number" class="form-control" id="salesPriceValue" min="0" name="sale_price" placeholder="VND" required>
         </div>
         <div class="form-group">
           <label for="dateValue"> Ngày nhập: </label>
-          <input type="date" class="form-control" id="dateValue" name="date">
+          <input type="date" class="form-control" id="dateValue" name="date" required>
         </div>
         <div class="form-group">
           <label for="descripValue"> Mô tả: </label>
-          <input type="text" class="form-control" id="descripValue" name="description">
+          <input type="text" class="form-control" id="descripValue" name="description" required>
         </div>
         <div class="form-group">
           <label for="visibleValue"> Trạng thái: </label>
@@ -196,25 +198,25 @@ function showEditInfo(elm) {
         </div>
       </form>
       `;
- 
+
   modalBodyId.innerHTML = chuoi_bodyModal;
   $(':hidden#IdValue').val($(elm).closest('tr').attr('id'));
   loadBrands();
   loadAttributes();
-  document.getElementById("nameValue").value = $(elm).closest('tr').find("td:eq(1)").text();
-  document.getElementById("skuValue").value = $(elm).closest('tr').find("td:eq(2)").text();
-  var currentBrand = $(elm).closest('tr').find("td:eq(3)").text();
-  var currentAttr = $(elm).closest('tr').find("td:eq(4)").text();
-  document.getElementById("priceValue").value = $(elm).closest('tr').find("td:eq(5)").text();
-  document.getElementById("salesPriceValue").value = $(elm).closest('tr').find("td:eq(6)").text();
-  document.getElementById("dateValue").value = $(elm).closest('tr').find("td:eq(7)").text();
+  document.getElementById("nameValue").value = $(elm).closest('tr').find("td:eq(0)").text();
+  document.getElementById("skuValue").value = $(elm).closest('tr').find("td:eq(1)").text();
+  var currentBrand = $(elm).closest('tr').find("td:eq(2)").text();
+  var currentAttr = $(elm).closest('tr').find("td:eq(3)").text();
+  document.getElementById("priceValue").value = $(elm).closest('tr').find("td:eq(4)").text();
+  document.getElementById("salesPriceValue").value = $(elm).closest('tr').find("td:eq(5)").text();
+  document.getElementById("dateValue").value = $(elm).closest('tr').find("td:eq(6)").text();
   //$('#brandValue option:selected').prop('selected', false);
   //$('#attrValue option:selected').prop('selected', false);
   $(document).on('shown.bs.modal', '#modelId', function (e) {
-  if(flag == 1) {
+    if (flag == 1) {
       $("#brandValue option:contains(" + currentBrand + ")").prop('selected', true);
       $("#attrValue option:contains(" + currentAttr + ")").prop('selected', true);
-  }
+    }
   });
   var al = $(elm).closest('tr').attr('id');
   getProductById(al);
@@ -223,7 +225,7 @@ function showEditInfo(elm) {
 
 function showDelInfo(elm) {
   var check = confirm(`Bạn muốn xóa sản phẩm khỏi danh sách ?`);
-  if(check==true) {
+  if (check == true) {
     var al = $(elm).closest('tr').attr('id');
     delProduct(al);
   }
