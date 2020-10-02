@@ -50,6 +50,37 @@
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
+       <!-- Button trigger modal -->
+      <button id="showModal" type="button" class="btn btn-primary btn-lg d-none" data-toggle="modal"
+        data-target="#modelId">
+        Launch
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title text-primary" id="modalTitleId">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="tagForm" id="tag-form" method="post" enctype="multipart/form-data">
+              <div class="modal-body" id="modalBodyId">
+                Body
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitModal">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--  action="http://localhost/OS-BanQuanAo/public/api/products/add" -->
+      <!-- /Modal -->
       <!-- menu -->
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
@@ -204,6 +235,10 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>SẢN PHẨM<small>MŨ</small></h2>
+                      <!-- add new product button -->
+                    <button id="addNewProduct" style="margin-left:20px;" class="btn btn-primary"
+                      onclick="showModal.click()"><i class="fa fa-file-import"></i> Thêm sản phẩm mới</button>
+
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -291,12 +326,75 @@
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
   <script type="text/javascript">
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var id = url.searchParams.get("id");
     $(document).ready(function () {
-      getpProductByCate(id);
+      getpProductByCate(cate_id);
     });
+  </script>
+
+  <!-- Add product modal -->
+  <script>
+    addNewProduct.onclick = () => {
+      flag = 0;
+      chuoi_titleModal = `<a class="text-primary" id="modal_title_id">Thêm sản phẩm</a>`; 
+      modalTitleId.innerHTML = chuoi_titleModal;
+      chuoi_bodyModal = `
+        <div class="form-group">
+          <label for="imageValue"> Hình ảnh: </label>
+          <input type="file" accept=".png, .jpeg, jpg, .psd, .pdf" id="imageValue" name="image">  
+        </div>
+        <div class="form-group">
+          <label for="nameValue"> Tên: </label>
+          <input class="form-control" id="nameValue" name="name">
+        </div>
+        <div class="form-group">
+          <label for="skuValue"> SKU: </label>
+          <input class="form-control" id="skuValue" name="sku">
+        </div>
+        <div class="form-group">
+          <label for="brandValue"> Thương hiệu: </label>
+          <select class="form-control" id="brandValue" name="brand">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="attrValue"> Thuộc tính: </label>
+          <select class="form-control" id="attrValue" name="attribute">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priceValue"> Giá: </label>
+          <input type="number" class="form-control" id="priceValue" min="0" name="price" placeholder="VND">
+          </input>
+        </div>
+        <div class="form-group">
+          <label for="salesPriceValue"> Giá khuyến mãi: </label>
+          <input type="number" class="form-control" id="salesPriceValue" min="0" name="sale_price" placeholder="VND">
+        </div>
+        <div class="form-group">
+          <label for="dateValue"> Ngày nhập: </label>
+          <input type="date" class="form-control" id="dateValue" name="date">
+        </div>
+        <div class="form-group">
+          <label for="descripValue"> Mô tả: </label>
+          <input type="text" class="form-control" id="descripValue" name="description">
+        </div>
+        <div class="form-group">
+          <label for="visibleValue"> Trạng thái: </label>
+          <select id="visibleValue" class="form-control" name="visibility">
+            <option id="pub">Publish</option>
+            <option id="hid">Hidden</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cateValue"> Loại: </label>
+          <input type="number" class="form-control" id="cateValue" min="0" name="cate">
+        </div>
+      </form>
+      `;
+      modalBodyId.innerHTML = chuoi_bodyModal;
+      loadBrands();
+      loadAttributes();
+      showModal.click();
+    }    
   </script>
 
   <!-- Custom Theme Scripts -->
