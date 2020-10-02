@@ -2,34 +2,96 @@ var flag = 0;
 var url_string = window.location.href;
 var url = new URL(url_string);
 var cate_id = url.searchParams.get("id");
-//var local_folder = "D:\\New folder\\MaNguonMoClient\\images\\";
+var local_folder = "D:\\New folder\\MaNguonMoClient\\images\\";
 
-function getpProductByCate(id) {
+function getProductByCate(id) {
   var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
-  $.getJSON(url, function (data) {
-    //var img = "";
-    var table = $('#datatable').DataTable();
-    $.each(data, function (key, val) {
-      //img = local_folder + val["Image"];
-      table.rows.add([{
-        "DT_RowId": val["Id"],
-        0: val["Name"],
-        1: val["SKU"],
-        2: val["Brand"],
-        3: val["Size"] + " - " + val["Color"],
-        4: val["Price"], //" VND",
-        5: val["Sale Price"],// + " VND",
-        6: val["Date"],
-        7: `
-      <div style="display: inline-flex" >
-      <button class="btn btn-success" onclick="showEditInfo(this)" name="btnUpdate"><i class="fa fa-edit"></i></button>
-      <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
-      </div>
-      `
-      }]);
-      table.draw();
-    });
-  });
+  var filename = "";
+  // $.getJSON(url, function (data) {
+  //   //var img = "";
+  //   var table = $('#datatable').DataTable();
+  //   $.each(data, function (key, val) {
+  //     //img = local_folder + val["Image"];
+  //     table.rows.add([{
+  //       "DT_RowId": val["Id"],
+  //       0: val["Name"],
+  //       1: val["SKU"],
+  //       2: val["Brand"],
+  //       3: val["Size"] + " - " + val["Color"],
+  //       4: val["Price"], //" VND",
+  //       5: val["Sale Price"],// + " VND",
+  //       6: val["Date"],
+  //       7: `
+  //     <div style="display: inline-flex" >
+  //     <button class="btn btn-success" onclick="showEditInfo(this)" name="btnUpdate"><i class="fa fa-edit"></i></button>
+  //     <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
+  //     </div>
+  //     `
+  //     }]);
+  //     table.draw();
+  //   });
+  //   console.log(data);
+  // });
+  $(document).ready(function() {
+  $('#datatable').DataTable({
+    destroy: true,
+    // "columnDefs": [
+    // { "width": "1%", "targets": 0 }
+    // ],
+    "ajax": {
+      "url":url,
+      "dataSrc": function (json) {
+      var return_data = new Array();
+      for(var i=0;i< json.length; i++){
+        filename = json[i].Image.replace(/C:\\fakepath\\/i, '');
+        return_data.push({
+          "DT_RowId" : json[i].Id,
+          'Image': '<img src="'+local_folder + filename +'" style="width: 100%;">',
+          'Name'  : json[i].Name,
+          'SKU' : json[i].SKU,
+          'Brand': json[i].Brand,
+          'Size': json[i].Size,
+          'Color': json[i].Color,
+          'Price': json[i].Price,
+          'Sale Price': json[i]["Sale Price"],
+          'Date': json[i].Date
+        })
+      }
+      return return_data;
+    }
+    },
+    "columns": [
+        // { "width": "1%" },
+        // {
+        //   "render": function (data, type, JsonResultRow, meta) {
+        //     return '<img src="'+local_folder+ 'data': 'Image' +'" style="max-width: 100%;">';
+        //   }
+        // },
+        { 'data': 'Image'},
+        { 'data': 'Name' },
+        { 'data': 'SKU' },
+        { 'data': 'Brand' },
+        //{ 'data': 'Size' },  
+        {
+          "data": null,
+          "render": function(data, type, full, meta){
+          return full["Size"] + " - " + full["Color"];
+          }
+        },
+        { 'data': 'Price' },
+        { 'data': 'Sale Price' },
+        { 'data': 'Date' },
+        {
+          "render": function (data, type, JsonResultRow, meta) {
+            return `<div style="display: inline-flex" >
+       <button class="btn btn-success" onclick="showEditInfo(this)" name="btnUpdate"><i class="fa fa-edit"></i></button>
+       <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
+       </div>`;
+          }
+        }
+    ]
+});
+  } );
 }
 
 function getProductById(id) {
@@ -104,7 +166,7 @@ $(function () {
       cate: ""
     };
     myObject['name'] = document.getElementById('nameValue').value;
-    myObject['image'] = "image";
+    myObject['image'] = document.getElementById('imageValue').value;
     var brand_id = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id.substring(6);
     myObject['brand'] = brand_id;
     myObject['sku'] = document.getElementById('skuValue').value;
@@ -116,12 +178,10 @@ $(function () {
     myObject['visibility'] = document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
     myObject['date'] = document.getElementById('dateValue').value;
     myObject['cate'] = cate_id;
-
-    if (myObject['name'] == "" || myObject['sku'] == "" || myObject['price'] == "" || myObject['sale_price'] == "" || myObject['description'] == "" || myObject['date'] == "") {
+    if (myObject['name'] == "" || myObject['sku'] == "" || myObject['price'] == "" || myObject['sale_price'] == "" || myObject['description'] == "" || myObject['date'] == "" || myObject['image'] == "") {
       alert('Vui lòng nhập đầy đủ thông tin sản phẩm');
       return false;
     }
-
     var myJSON = JSON.stringify(myObject);
     e.preventDefault();
     $.ajax({
@@ -132,11 +192,11 @@ $(function () {
       contentType: 'application/json;charset=UTF-8',
       success: function (response) {
         console.log(response);
-        alert(resString);
         var table = $('#datatable').DataTable();
         table
           .clear();
-        getpProductByCate(myObject['cate']);
+        getProductByCate(myObject['cate']);
+        alert(resString);
       },
       error: function () {
         alert('Error');
@@ -151,6 +211,10 @@ function showEditInfo(elm) {
   chuoi_titleModal = `<a class="text-success">Sửa sản phẩm</a>`;
   modalTitleId.innerHTML = chuoi_titleModal;
   chuoi_bodyModal = `
+        <div class="form-group">
+          <label for="nameValue"> Ảnh: </label>
+         <input type="file" accept=".png, .jpeg, .jpg" id="imageValue" name="image" required>
+        </div>
         <div class="form-group">
           <label for="nameValue"> Tên: </label>
           <input class="form-control" id="nameValue" name="name" required>
@@ -203,13 +267,13 @@ function showEditInfo(elm) {
   $(':hidden#IdValue').val($(elm).closest('tr').attr('id'));
   loadBrands();
   loadAttributes();
-  document.getElementById("nameValue").value = $(elm).closest('tr').find("td:eq(0)").text();
-  document.getElementById("skuValue").value = $(elm).closest('tr').find("td:eq(1)").text();
-  var currentBrand = $(elm).closest('tr').find("td:eq(2)").text();
-  var currentAttr = $(elm).closest('tr').find("td:eq(3)").text();
-  document.getElementById("priceValue").value = $(elm).closest('tr').find("td:eq(4)").text();
-  document.getElementById("salesPriceValue").value = $(elm).closest('tr').find("td:eq(5)").text();
-  document.getElementById("dateValue").value = $(elm).closest('tr').find("td:eq(6)").text();
+  document.getElementById("nameValue").value = $(elm).closest('tr').find("td:eq(1)").text();
+  document.getElementById("skuValue").value = $(elm).closest('tr').find("td:eq(2)").text();
+  var currentBrand = $(elm).closest('tr').find("td:eq(3)").text();
+  var currentAttr = $(elm).closest('tr').find("td:eq(4)").text();
+  document.getElementById("priceValue").value = $(elm).closest('tr').find("td:eq(5)").text();
+  document.getElementById("salesPriceValue").value = $(elm).closest('tr').find("td:eq(6)").text();
+  document.getElementById("dateValue").value = $(elm).closest('tr').find("td:eq(7)").text();
   //$('#brandValue option:selected').prop('selected', false);
   //$('#attrValue option:selected').prop('selected', false);
   $(document).on('shown.bs.modal', '#modelId', function (e) {
