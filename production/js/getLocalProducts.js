@@ -1,4 +1,7 @@
 var flag = 0;
+var url_string = window.location.href;
+var url = new URL(url_string);
+var cate_id = url.searchParams.get("id");
 
 function getpProductByCate(id) {
   var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
@@ -51,7 +54,7 @@ function loadAttributes() {
   });
 }
 
-function delProduct(id,cate) {
+function delProduct(id) {
   var urlString = "http://localhost/OS-BanQuanAo/public/api/products/delete/" + id;
   $.ajax({
     url: urlString,
@@ -61,7 +64,7 @@ function delProduct(id,cate) {
         var table = $('#datatable').DataTable();
         table
         .clear();
-        getpProductByCate(cate);
+        getpProductByCate(cate_id);
     },
     error: function(response) {
       console.log(response);
@@ -110,7 +113,7 @@ $(function () {
     myObject['description'] = document.getElementById('descripValue').value;
     myObject['visibility'] = document.getElementById("visibleValue").options[document.getElementById("visibleValue").selectedIndex].value;
     myObject['date'] = document.getElementById('dateValue').value;
-    myObject['cate'] = document.getElementById('cateValue').value;
+    myObject['cate'] = cate_id;
     var myJSON = JSON.stringify(myObject);
     e.preventDefault();
     $.ajax({
@@ -186,10 +189,6 @@ function showEditInfo(elm) {
           </select>
         </div>
         <div class="form-group">
-          <label for="cateValue"> Loại: </label>
-          <input type="number" class="form-control" id="cateValue" min="0" name="cate" readonly>
-        </div>
-        <div class="form-group">
           <input type="hidden" id="IdValue" name="IdValue" value="">
         </div>
       </form>
@@ -206,10 +205,6 @@ function showEditInfo(elm) {
   document.getElementById("priceValue").value = $(elm).closest('tr').find("td:eq(5)").text();
   document.getElementById("salesPriceValue").value = $(elm).closest('tr').find("td:eq(6)").text();
   document.getElementById("dateValue").value = $(elm).closest('tr').find("td:eq(7)").text();
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var id = url.searchParams.get("id");
-  document.getElementById("cateValue").value = id;
   //$('#brandValue option:selected').prop('selected', false);
   //$('#attrValue option:selected').prop('selected', false);
   $(document).on('shown.bs.modal', '#modelId', function (e) {
@@ -227,9 +222,6 @@ function showDelInfo(elm) {
   var check = confirm(`Bạn muốn xóa sản phẩm khỏi danh sách ?`);
   if(check==true) {
     var al = $(elm).closest('tr').attr('id');
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var cate = url.searchParams.get("id");
-    delProduct(al,cate);
+    delProduct(al);
   }
 }
