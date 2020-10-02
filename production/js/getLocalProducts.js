@@ -2,23 +2,25 @@ var flag = 0;
 var url_string = window.location.href;
 var url = new URL(url_string);
 var cate_id = url.searchParams.get("id");
+//var local_folder = "D:\\New folder\\MaNguonMoClient\\images\\";
 
 function getpProductByCate(id) {
   var url = "http://localhost/OS-BanQuanAo/public/api/products/cate/" + id;
   $.getJSON(url, function (data) {
+  //var img = "";
+  var table = $('#datatable').DataTable();
   $.each(data, function (key, val) {
-    var table = $('#datatable').DataTable();
+    //img = local_folder + val["Image"];
     table.rows.add([{
       "DT_RowId": val["Id"],
-      0: val["Image"],
-      1: val["Name"],
-      2: val["SKU"],
-      3: val["Brand"],
-      4: val["Size"] + " - " + val["Color"],
-      5: val["Price"], //" VND",
-      6: val["Sale Price"],// + " VND",
-      7: val["Date"],
-      8: `
+      0: val["Name"],
+      1: val["SKU"],
+      2: val["Brand"],
+      3: val["Size"] + " - " + val["Color"],
+      4: val["Price"], //" VND",
+      5: val["Sale Price"],// + " VND",
+      6: val["Date"],
+      7: `
       <div style="display: inline-flex" >
       <button class="btn btn-success" onclick="showEditInfo(this)" name="btnUpdate"><i class="fa fa-edit"></i></button>
       <button class="btn btn-danger" onclick="showDelInfo(this)"><i class="fa fa-trash"></i></button>
@@ -27,7 +29,7 @@ function getpProductByCate(id) {
       }]);
       table.draw();
     });
-  });
+   });
 }
 
 function getProductById(id) {
@@ -102,7 +104,8 @@ $(function () {
       cate: ""
     };
     myObject['name'] = document.getElementById('nameValue').value;
-    myObject['image'] = "image";
+    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
+    myObject['image'] = filename;
     var brand_id = document.getElementById('brandValue').options[document.getElementById('brandValue').selectedIndex].id.substring(6);
     myObject['brand'] = brand_id;
     myObject['sku'] = document.getElementById('skuValue').value;
@@ -144,7 +147,7 @@ function showEditInfo(elm) {
   modalTitleId.innerHTML = chuoi_titleModal;
   chuoi_bodyModal = `<div class="form-group">
           <label for="imageValue"> Hình ảnh: </label>
-          <input type="file" accept=".png, .jpeg, jpg, .psd, .pdf" id="imageValue" name="image">  
+          <input type="file" accept=".png, .jpeg, .jpg, .psd, .pdf" id="imageValue" name="image">  
         </div>
         <div class="form-group">
           <label for="nameValue"> Tên: </label>
